@@ -1,4 +1,4 @@
-import { readCSVFile } from '../src/utils/csvUtils';
+import { readCSVFile } from '../src/utils/dataUtils';
 import Papa from 'papaparse';
 
 jest.mock('papaparse', () => ({

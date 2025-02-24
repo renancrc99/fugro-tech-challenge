@@ -16,15 +16,7 @@ Before you can run the project, you need to install the required dependencies. O
 npm install
 ```
 
-### 2. Build the TypeScript Code
-
-Next, you'll need to transpile the TypeScript code into JavaScript so that the html can run the js file, to do this run:
-
-```bash
-npm run build
-```
-
-### 3. Start the Project
+### 2. Start the Project
 
 Finally, we can start the project and run the application, in your terminal:
 

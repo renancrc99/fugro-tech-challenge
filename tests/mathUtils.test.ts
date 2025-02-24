@@ -1,4 +1,4 @@
-import { calculateDistance, findClosestSegment, getClosestPointOnSegment } from '../src/utils/mathUtils';
+import { calculateDistance, findClosestSegment, findNearestPointOnSegment } from '../src/utils/mathUtils';
 
 describe('Testing math operations related functions...', () => {
     test('Calculate the euclidean distance between two points', () => {
@@ -17,7 +17,7 @@ describe('Testing math operations related functions...', () => {
     });
 
     test('Return the closest point on segment', () => {
-        const result = getClosestPointOnSegment(5, 5, 0, 0, 10, 0);
+        const result = findNearestPointOnSegment(5, 5, 0, 0, 10, 0);
         expect(result).toEqual({ x: 5, y: 0 });
     });
 });
