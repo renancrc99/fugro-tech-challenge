@@ -17,6 +17,8 @@ export function findClosestSegment(xCoords: number[], yCoords: number[], easting
 
         const t = ((easting - x1) * dx + (northing - y1) * dy) / (dx * dx + dy * dy);
 
+        console.log(`Value of t: ${t}`)
+
         let closestX, closestY;
 
         if (t < 0) {
