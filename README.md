@@ -36,7 +36,7 @@ npm run start
 
 ### 1. Select a .csv file
 
-Choose a csv file in your computer containing the X and Y coordinates to plot the polyline.
+Choose a csv file in your computer containing the X and Y coordinates to plot the polyline. If needed, samples were provided inside the samples directory of this repository
 
 ### 2. Enter the Easting and Northing coordinate values
 
@@ -46,7 +46,7 @@ Input the easting and northing values to plot a user point in the graph. It'll b
 
 Finally, just press the "Compute" button to calculate offset and station values, and to generate the graph.
 
-## Testing
+## Development Testing
 
 This project contains unit tests for validation of basic function operations. To run the tests in your machine, run this command in your terminal:
 
