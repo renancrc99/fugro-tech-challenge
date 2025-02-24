@@ -45,10 +45,8 @@ export function findNearestPointOnSegment(px: number, py: number, ax: number, ay
     const atob = { x: bx - ax, y: by - ay };
     const atop = { x: px - ax, y: py - ay };
     const len = (atob.x * atob.x) + (atob.y * atob.y);
-    let dot = (atop.x * atob.x) + (atop.y * atob.y);
+    const dot = (atop.x * atob.x) + (atop.y * atob.y);
     const t = Math.min(1, Math.max(0, dot / len));
-
-    dot = ((bx - ax) * (py - ay)) - ((by - ay) * (px - ax));
 
     return { x: ax + (atob.x * t), y: ay + (atob.y * t) };
 }
