@@ -2,6 +2,14 @@ export function calculateDistance(x1: number, y1: number, x2: number, y2: number
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
+export function calculateT(px: number, py: number, ax: number, ay: number, bx: number, by: number): number {
+    const dx = bx - ax;
+    const dy = by - ay;
+    const len = dx * dx + dy * dy;
+    const dot = (px - ax) * dx + (py - ay) * dy;
+    return Math.min(1, Math.max(0, dot / len));
+}
+
 export function findClosestSegment(xCoords: number[], yCoords: number[], easting: number, northing: number): number {
     let closestSegmentIndex = -1;
     let minDistance = Infinity;
@@ -12,25 +20,10 @@ export function findClosestSegment(xCoords: number[], yCoords: number[], easting
         const x2 = xCoords[i + 1];
         const y2 = yCoords[i + 1];
 
-        const dx = x2 - x1;
-        const dy = y2 - y1;
+        const t = calculateT(easting, northing, x1, y1, x2, y2);
 
-        const t = ((easting - x1) * dx + (northing - y1) * dy) / (dx * dx + dy * dy);
-
-        console.log(`Value of t: ${t}`)
-
-        let closestX, closestY;
-
-        if (t < 0) {
-            closestX = x1;
-            closestY = y1;
-        } else if (t > 1) {
-            closestX = x2;
-            closestY = y2;
-        } else {
-            closestX = x1 + t * dx;
-            closestY = y1 + t * dy;
-        }
+        const closestX = x1 + (x2 - x1) * t;
+        const closestY = y1 + (y2 - y1) * t;
 
         const distance = calculateDistance(easting, northing, closestX, closestY);
 
@@ -44,11 +37,10 @@ export function findClosestSegment(xCoords: number[], yCoords: number[], easting
 }
 
 export function findNearestPointOnSegment(px: number, py: number, ax: number, ay: number, bx: number, by: number) {
-    const atob = { x: bx - ax, y: by - ay };
-    const atop = { x: px - ax, y: py - ay };
-    const len = (atob.x * atob.x) + (atob.y * atob.y);
-    const dot = (atop.x * atob.x) + (atop.y * atob.y);
-    const t = Math.min(1, Math.max(0, dot / len));
+    const t = calculateT(px, py, ax, ay, bx, by);
 
-    return { x: ax + (atob.x * t), y: ay + (atob.y * t) };
+    const closestX = ax + (bx - ax) * t;
+    const closestY = ay + (by - ay) * t;
+
+    return { x: closestX, y: closestY };
 }
