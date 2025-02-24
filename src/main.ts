@@ -13,18 +13,19 @@ let csvData: any[] = [];
 let file: File | null = null;
 
 document.getElementById('csvFileInput')?.addEventListener('change', async (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
+    let inputElement = event.target as HTMLInputElement;
     file = inputElement?.files ? inputElement.files[0] : null;
+
+    if (file && file.type !== "text/csv" && !file.name.endsWith(".csv")) {
+        alert("Please select a valid CSV file.");
+        inputElement.value = "";
+    }
 
     csvData = await readCSVFile(file);
 });
 
 document.getElementById('computeBtn')?.addEventListener('click', async () => {
     try {
-        if (!file) {
-            console.error('No CSV file selected. Please upload a file first.');
-            return;
-        }
 
         const treatedData = treatCSVData(csvData);
 
